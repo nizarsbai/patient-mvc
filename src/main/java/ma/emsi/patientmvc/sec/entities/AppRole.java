@@ -1,4 +1,4 @@
-package ma.emsi.patientmvc.sec;
+package ma.emsi.patientmvc.sec.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
