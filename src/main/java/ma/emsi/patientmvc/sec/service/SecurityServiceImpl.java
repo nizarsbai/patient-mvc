@@ -30,7 +30,7 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public AppUser saveNewUser(String username, String password, String rePassword) {
-        if(password.equals(rePassword)) throw new RuntimeException("Password don't match !");
+        if(!password.equals(rePassword)) throw new RuntimeException("Password don't match !");
         String hashedPWD=passwordEncoder.encode(password);
         AppUser appUser= new AppUser();
         appUser.setUserId(UUID.randomUUID().toString());
@@ -48,8 +48,8 @@ public class SecurityServiceImpl implements SecurityService {
         appRole=new AppRole();
         appRole.setRoleName(roleName);
         appRole.setDescription(description);
-        AppRole savedAppRole=appRoleRepository.save(appRole);
-        return savedAppRole;
+        appRoleRepository.save(appRole);
+        return appRole;
     }
 
     @Override

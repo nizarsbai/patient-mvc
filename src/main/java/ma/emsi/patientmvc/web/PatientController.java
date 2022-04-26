@@ -39,16 +39,16 @@ public class PatientController {
         return "redirect:/user/index?page="+page+"&keyword="+keyword;
     }
 
-    @GetMapping("/")
+    @GetMapping(path = "/")
     public String home(){
         return "home";
     }
-    @GetMapping("/user/patients")
+    @GetMapping(path="/user/patients")
     @ResponseBody
     public List<Patient> listPatients(){
         return patientRepository.findAll();
     }
-    @GetMapping("/admin/formPatients")
+    @GetMapping(path="/admin/formPatients")
     public String formPatient(Model model){
         model.addAttribute("patient",new Patient());
         return "formPatients";

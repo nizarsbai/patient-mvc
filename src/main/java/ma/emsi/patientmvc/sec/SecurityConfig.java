@@ -1,5 +1,6 @@
 package ma.emsi.patientmvc.sec;
 
+import ma.emsi.patientmvc.sec.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,19 +22,22 @@ import javax.sql.DataSource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         PasswordEncoder passwordEncoder=passwordEncoder();
-        /*
+        /**/
         String encodedPWD=passwordEncoder.encode("1234");
         System.out.println(encodedPWD);
-        /*
+
         auth.inMemoryAuthentication().withUser("user1").password(encodedPWD).roles("USER");
         auth.inMemoryAuthentication().withUser("user2").password(passwordEncoder.encode("1111")).roles("USER");
         auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder.encode("2345")).roles("USER","ADMIN");
-        */
-        //de InMemoryAuthentification to JDBCAuthentication
+        auth.inMemoryAuthentication().withUser("nizar").password(passwordEncoder.encode("2345")).roles("USER","ADMIN");
+
+        /* //de InMemoryAuthentification to JDBCAuthentication
         /*
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
@@ -41,12 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("select username as principal, role as role from users_roles where username=?")
                 .rolePrefix("ROLE_")
                 .passwordEncoder(passwordEncoder); */
-        auth.userDetailsService(new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return null;
-            }
-        });
+        auth.userDetailsService(userDetailsService);
+
     }
 
     @Override
@@ -55,6 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/").permitAll();
         http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
         http.authorizeRequests().antMatchers("/user/**").hasRole("USER");
+        http.authorizeRequests().antMatchers("/admin/webjars/**").permitAll();
+        http.authorizeRequests().antMatchers("/user/webjars/**").permitAll();
         http.authorizeRequests().antMatchers("/webjars/**").permitAll();
         http.authorizeRequests().anyRequest().authenticated();
         http.exceptionHandling().accessDeniedPage("/403");
