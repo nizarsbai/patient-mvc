@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="template1"
->
+      layout:decorate="template1"
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Form Patients</title>
@@ -12,27 +12,35 @@
 <div layout:fragment="content1">
     <div class="col-md-6 offset-3">
     <form method="post" th:action="@{/admin/save}">
+        <div class="card-header" style="font-family: 'Arial Black'">Ajouter un Nouveau Patient</div>
+        </br>
         <div>
             <label for="nom">Nom</label>
             <input id="nom" class="form-control" type="text" name="nom" th:value="${patient.nom}">
             <span class="text-danger" th:errors="${patient.nom}"></span>
         </div>
+        </br>
         <div>
             <label>Date de Naissance</label>
             <input class="form-control" type="date" name="dateNaissance" th:value="${patient.dateNaissance}">
             <span class="text-danger" th:errors="${patient.dateNaissance}"></span>
         </div>
+        </br>
         <div>
             <label>Malade</label>
             <input type="checkbox" name="malade" th:checked="${patient.malade}">
             <span class="text-danger" th:errors="${patient.malade}"></span>
         </div>
+        </br>
         <div>
             <label>Score</label>
             <input class="form-control" type="text" name="score" th:value="${patient.score}">
             <span class="text-danger" th:errors="${patient.score}"></span>
         </div>
-        <button type="submit" class="btn btn-primary">Save</button>
+        </br>
+        <div>
+        <button type="submit" class="btn btn-secondary">Save</button>
+        </div>
     </form>
 </div>
 </div>
