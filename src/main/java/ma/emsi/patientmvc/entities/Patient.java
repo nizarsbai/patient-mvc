@@ -18,6 +18,9 @@ public class Patient {
     @NotEmpty
     @Size(min = 3, max=40)
     private String nom;
+    @NotEmpty
+    @Size(min = 3, max=40)
+    private String prenom;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateNaissance;

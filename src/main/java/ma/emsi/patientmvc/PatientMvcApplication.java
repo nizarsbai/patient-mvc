@@ -30,15 +30,15 @@ public class PatientMvcApplication {
     CommandLineRunner commandLineRunner(PatientRepository patientRepository){
         return args -> {
             patientRepository.save(
-                    new Patient(null,"Hassan",new Date(),false,122));
+                    new Patient(null,"Hassan","Sbai",new Date(),false,122));
             patientRepository.save(
-                    new Patient(null,"Mohammed",new Date(),true,321));
+                    new Patient(null,"Mohammed","Tarik",new Date(),true,321));
             patientRepository.save(
-                    new Patient(null,"Yasmine",new Date(),true,165));
+                    new Patient(null,"Yasmine","Berrada",new Date(),true,165));
             patientRepository.save(
-                    new Patient(null,"Hanaa",new Date(),false,132));
+                    new Patient(null,"Hanaa","Fadal",new Date(),false,132));
             patientRepository.save(
-                    new Patient(null,"Hanaa",new Date(),false,132));/**/
+                    new Patient(null,"Hanaa","Hanaa",new Date(),false,132));/**/
 
 
 

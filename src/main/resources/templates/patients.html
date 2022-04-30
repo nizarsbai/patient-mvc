@@ -28,13 +28,14 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>ID</th><th>Nom</th><th>Date</th><th>Malade</th><th>Score</th>
+                    <th>ID</th><th>Nom</th><th>Prenom</th><th>Date</th><th>Malade</th><th>Score</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="p:${listPatients}">
                     <td th:text="${p.id}"></td>
                     <td th:text="${p.nom}"></td>
+                    <td th:text="${p.prenom}"></td>
                     <td th:text="${p.dateNaissance}"></td>
                     <td th:text="${p.malade}"></td>
                     <td th:text="${p.score}"></td>
