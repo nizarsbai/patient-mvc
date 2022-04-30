@@ -25,19 +25,21 @@ public class PatientController {
                            @RequestParam(name="page", defaultValue = "0") int page,
                            @RequestParam(name = "size", defaultValue = "5") int size,
                            @RequestParam(name = "keyword", defaultValue = "") String keyword,
+                           @RequestParam(name = "prenom", defaultValue = "") String prenom,
                            @RequestParam(name = "score", defaultValue = "10") int score){
-        Page<Patient> pagePatients = patientRepository.findByNomContainsAndScoreGreaterThanEqual(keyword,score,PageRequest.of(page,size));
+        Page<Patient> pagePatients = patientRepository.findByNomContainsAndPrenomContainsAndScoreGreaterThanEqual(keyword,prenom,score,PageRequest.of(page,size));
         model.addAttribute("listPatients", pagePatients.getContent());
         model.addAttribute("pages",new int[pagePatients.getTotalPages()]);
         model.addAttribute("currentPage", page);
         model.addAttribute("keyword",keyword);
+        model.addAttribute("prenom",prenom);
         model.addAttribute("score",score);
         return "patients";
     }
     @GetMapping("/admin/delete")
-    public String delete(Long id, String keyword,int score, int page){
+    public String delete(Long id, String keyword,String prenom, int score, int page){
         patientRepository.deleteById(id);
-        return "redirect:/user/index?page="+page+"&keyword="+keyword+"&score="+score;
+        return "redirect:/user/index?page="+page+"&keyword="+keyword+"&score="+score+"&prenom="+prenom;
     }
 
     @GetMapping(path = "/")
@@ -57,19 +59,21 @@ public class PatientController {
     @PostMapping(path = "/admin/save")
     public String save(Model model, @Valid Patient patient, BindingResult bindingResult,
                        @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "") String keyword,
+                       @RequestParam(defaultValue = "") String prenom,
                        @RequestParam(name = "score", defaultValue = "") int score){
         if(bindingResult.hasErrors()) return "formPatients";
         patientRepository.save(patient);
-        return "redirect:/user/index?page="+page+"&keyword="+keyword+"&score="+score;
+        return "redirect:/user/index?page="+page+"&keyword="+keyword+"&score="+score+"&prenom="+prenom;
     }
 
     @GetMapping("/admin/editPatient")
-    public String editPatients(Model model, Long id, String keyword,int score, int page){
+    public String editPatients(Model model, Long id, String keyword, String prenom, int score, int page){
         Patient patient=patientRepository.findById(id).orElse(null);
         if(patient==null) throw new RuntimeException("Patient introuvable");
         model.addAttribute("patient",patient);
         model.addAttribute("page",page);
         model.addAttribute("keyword",keyword);
+        model.addAttribute("prenom",prenom);
         model.addAttribute("score",score);
         return "editPatient";
     }

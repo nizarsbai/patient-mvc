@@ -19,9 +19,11 @@
       <div class="card-header" style="font-family: 'Arial Black'">Liste des patients</div>
         <div class="card-body">
             <form method="get" th:action="@{/user/index}">
-                <label style="font-family: 'Rage Italic'">Key Word</label>
+                <label style="font-family: 'Rage Italic'">Nom : </label>
                 <input type="text" name="keyword" th:value="${keyword}">
-                <label style="font-family: 'Rage Italic'"> Score </label>
+                <label style="font-family: 'Rage Italic'"> Prenom : </label>
+                <input type="text" name="prenom" th:value="${prenom}">
+                <label style="font-family: 'Rage Italic'"> Score : </label>
                 <input type="text" name="score" th:value="${score}">
                 <button type="submit" class="btn btn-secondary"> <i class="fa fa-search"></i> Chercher</button>
             </form>
@@ -40,11 +42,11 @@
                     <td th:text="${p.malade}"></td>
                     <td th:text="${p.score}"></td>
                     <td sec:authorize="hasRole('ADMIN')">
-                        <a onclick="return confirm('Etes vous sure?')"  class="btn btn-danger" th:href="@{/admin/delete(id=${p.id},keyword=${keyword}, score=${score}, page=${currentPage})}">
+                        <a onclick="return confirm('Etes vous sure?')"  class="btn btn-danger" th:href="@{/admin/delete(id=${p.id},keyword=${keyword},prenom=${prenom}, score=${score}, page=${currentPage})}">
                             <i class="fa fa-trash"></i> Delete</a>
                     </td>
                     <td sec:authorize="hasRole('ADMIN')">
-                        <a  class="btn btn-success" th:href="@{/admin/editPatient(id=${p.id}, keyword=${keyword}, score=${score}, page=${currentPage})}">
+                        <a  class="btn btn-success" th:href="@{/admin/editPatient(id=${p.id}, keyword=${keyword},prenom=${prenom}, score=${score}, page=${currentPage})}">
                             <i class="fas fa-edit"></i> Edit</a>
                     </td>
                 </tr>
@@ -54,7 +56,7 @@
                 <li th:each="page,status:${pages}">
                     <a th:class="${status.index==currentPage?'btn btn-secondary ms-1':'btn btn-outline-secondary ms-1'}"
                        th:text="${status.index}"
-                       th:href="@{/user/index(page=${status.index}, keyword=${keyword}, score=${score})}"
+                       th:href="@{/user/index(page=${status.index}, keyword=${keyword},prenom=${prenom}, score=${score})}"
                     ></a>
                 </li>
             </ul>
