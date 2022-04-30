@@ -2,7 +2,7 @@
 Application web JEE Gestion des patients
 
 ### Page Login
-<img src="D:\patient-mvc\src\pics\Capture1.PNG" width=""/>
+<img src="D:\patient-mvc\src\pics\Capture1.jpg" width=""/>
 
 * Cette page nous permet de s'authentifier pour accéder à l'interface principale du gestion des patients
 * On peut se connecter par le Role "Admin" ou "USER"
