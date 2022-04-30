@@ -26,6 +26,7 @@ public class PatientController {
                            @RequestParam(name = "size", defaultValue = "5") int size,
                            @RequestParam(name = "keyword", defaultValue = "") String keyword,
                            @RequestParam(name = "prenom", defaultValue = "") String prenom,
+                           //@RequestParam(name = "malade", defaultValue = "") boolean malade,
                            @RequestParam(name = "score", defaultValue = "10") int score){
         Page<Patient> pagePatients = patientRepository.findByNomContainsAndPrenomContainsAndScoreGreaterThanEqual(keyword,prenom,score,PageRequest.of(page,size));
         model.addAttribute("listPatients", pagePatients.getContent());
@@ -34,6 +35,7 @@ public class PatientController {
         model.addAttribute("keyword",keyword);
         model.addAttribute("prenom",prenom);
         model.addAttribute("score",score);
+        //model.addAttribute("malade",malade);
         return "patients";
     }
     @GetMapping("/admin/delete")
@@ -60,6 +62,7 @@ public class PatientController {
     public String save(Model model, @Valid Patient patient, BindingResult bindingResult,
                        @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "") String keyword,
                        @RequestParam(defaultValue = "") String prenom,
+                       //@RequestParam(defaultValue = "") boolean malade,
                        @RequestParam(name = "score", defaultValue = "") int score){
         if(bindingResult.hasErrors()) return "formPatients";
         patientRepository.save(patient);
@@ -75,6 +78,7 @@ public class PatientController {
         model.addAttribute("keyword",keyword);
         model.addAttribute("prenom",prenom);
         model.addAttribute("score",score);
+        //model.addAttribute("malade",malade);
         return "editPatient";
     }
 

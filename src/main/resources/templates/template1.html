@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
->
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Cabinet Médical</title>
@@ -21,7 +21,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">Accueil</a>
+                <a class="nav-link" th:href="@{/}">Accueil</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Médecin</a>
@@ -64,5 +64,8 @@
 <section layout:fragment="content1">
 
 </section>
+<center>
+<h1>Bienvenue au siteweb de notre Cabinet Médicale</h1>
+</center>
 </body>
 </html>
