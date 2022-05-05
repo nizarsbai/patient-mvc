@@ -1,6 +1,8 @@
 package ma.emsi.patientmvc;
 
+import ma.emsi.patientmvc.entities.Medecin;
 import ma.emsi.patientmvc.entities.Patient;
+import ma.emsi.patientmvc.repositories.MedecinRepository;
 import ma.emsi.patientmvc.repositories.PatientRepository;
 import ma.emsi.patientmvc.sec.service.SecurityService;
 import org.springframework.boot.CommandLineRunner;
@@ -26,6 +28,32 @@ public class PatientMvcApplication {
     }
 
      */
+
+    //Pour le médecin
+    @Bean
+    CommandLineRunner commandLineRunner(MedecinRepository medecinRepository){
+        return args -> {
+            medecinRepository.save(
+                    new Medecin(null,"Hassan","Sbai",new Date(),"BK989"));
+            medecinRepository.save(
+                    new Medecin(null,"Nizar","Sbai",new Date(),"BK7189"));
+            medecinRepository.save(
+                    new Medecin(null,"Yasmine","Berrada",new Date(),"BK12344"));
+            medecinRepository.save(
+                    new Medecin(null,"Dounia","MTR",new Date(),"BK54321"));
+
+
+
+
+            medecinRepository.findAll().forEach(p->
+                    System.out.println(p.getNom()));
+        };
+
+    }
+
+
+
+
     //@Bean
     CommandLineRunner commandLineRunner(PatientRepository patientRepository){
         return args -> {
